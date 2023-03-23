@@ -57,7 +57,7 @@
 				@if($beranda->media_type == 1)
 				<img src="{{asset('assets/media/img/'.$beranda->file)}}" widt="100%"/>
 				@elseif($beranda->media_type == 2)
-				<video width="100%" height="500" controls>
+				<video width="100%" height="600" controls>
                     <source src="{{asset('assets/media/vid/'.$beranda->file)}}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>

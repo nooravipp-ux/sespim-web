@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class GaleriController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $galeries = DB::table('t_galeri')->get();
@@ -26,7 +30,7 @@ class GaleriController extends Controller
         $fileName = NULL;
 
         if ($file) {
-            if ($request->media_type == "image") {
+            if ($request->media_type == 1) {
                 $fileName = time() . "_" . $file->getClientOriginalName();
                 $file_destinationPath = public_path() . '/assets/media/img';
                 $file->move($file_destinationPath, $fileName);
@@ -42,8 +46,9 @@ class GaleriController extends Controller
             "description" => $request->description,
             "media_type" => $request->media_type,
             "file" => $fileName,
-            'created_at' => date("Y-m-d H:i:s"),
-            'created_by' => Auth::user()->name
+            "link" => $request->link,
+            "created_at" => date("Y-m-d H:i:s"),
+            "created_by" => Auth::user()->name
         ]);
 
         return redirect()->route('galeri.index');
@@ -60,9 +65,14 @@ class GaleriController extends Controller
 
         $file = $request->file('file');
         $fileName = NULL;
+        $link = NULL;
+
+        if($request->link){
+            $link = $request->link;
+        }
 
         if ($file) {
-            if ($request->media_type == "image") {
+            if ($request->media_type == 1) {
                 $fileName = time() . "_" . $file->getClientOriginalName();
                 $file_destinationPath = public_path() . '/assets/media/img';
                 $file->move($file_destinationPath, $fileName);
@@ -80,6 +90,7 @@ class GaleriController extends Controller
             "description" => $request->description,
             "media_type" => $request->media_type,
             "file" => $fileName,
+            "link" => $link,
             'updated_at' => date("Y-m-d H:i:s"),
             'updated_by' => Auth::user()->name
         ]);

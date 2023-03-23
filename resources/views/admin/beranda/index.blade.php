@@ -56,8 +56,8 @@
                                     <label class="col-sm-12 col-form-label">Publish</label>
                                     <div class="col-sm-9">
                                         <select class="form-control" name="publish">
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
+                                            <option value="1" <?php echo $data != null && $data->publish != 1 ? "" : "selected" ?>>Yes</option>
+                                            <option value="0" <?php echo $data != null && $data->publish != 0 ? "" : "selected" ?>>No</option>
                                         </select>
                                     </div>
                                 </div>

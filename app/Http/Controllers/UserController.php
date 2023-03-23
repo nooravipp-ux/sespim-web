@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $users = DB::table('users')
                 ->select('users.id', 'users.name as username', 'm_role.name as role_name')
@@ -34,9 +37,26 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
 
+    public function edit($id){
+        $roles = DB::table('m_role')->get();
+        $user = DB::table('users')->where('id', $id)->first();
+        return view('admin.users.edit', compact('user', 'roles'));
+    }
+
+    public function update(Request $request){
+
+        DB::table('users')->where('id', $request->id)->update([
+            "name" => $request->name,
+            "email" => $request->email,
+            "role_id" => $request->role_id,
+        ]);
+
+        return redirect()->route('user.index');
+    }
+
     public function changePassword()
     {
-        return view('admin.user.change-password');
+        return view('admin.users.change-password');
     }
 
     public function storeChangedPassword(Request $request)

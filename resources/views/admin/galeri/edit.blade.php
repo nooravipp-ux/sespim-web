@@ -21,17 +21,24 @@
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-form-label">Media Type</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="media_type">
-                                            <option value="image" <?php echo ($data->media_type == 'image') ? "selected" : "";?>>Image</option>
-                                            <option value="video"  <?php echo ($data->media_type == 'video') ? "selected" : "";?>>Video</option>
+                                        <select class="form-control" name="media_type" id="media_type">
+                                            <option value="1" <?php echo ($data->media_type == 1) ? "selected" : "";?>>Image</option>
+                                            <option value="2" <?php echo ($data->media_type == 2) ? "selected" : "";?>>Video</option>
+                                            <option value="3" <?php echo ($data->media_type == 3) ? "selected" : "";?>>Embed Youtube</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row" id="file">
                                     <label class="col-sm-12 col-form-label">File</label>
                                     <div class="col-sm-9">
                                         <input type="file" class="form-control" name="file">
                                         <input type="hidden" class="form-control" name="file_existing" value="{{$data->file}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row" id="link">
+                                    <label class="col-sm-12 col-form-label">Link</label>
+                                    <div class="col-sm-9">
+                                        <textarea type="file" class="form-control" name="link" height="400">{{$data->link}}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -59,8 +66,33 @@
 @endsection
 
 @section('script')
-<!-- <script src="{{asset('admin/vendors/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('admin/vendors/ckeditor/ckeditor.js')}}"></script>
 <script>
-    CKEDITOR.replace('content-editor');
-</script> -->
+    $(document).ready(function() {
+        $('#file').hide();
+        $('#link').hide();
+
+        var media_type = $('#media_type').val();
+        if (media_type) {
+            if ($('#media_type').val() == 1 || $('#media_type').val() == 2) {
+                $('#link').hide();
+                $('#file').show();
+            } else {
+                $('#file').hide();
+                $('#link').show();
+            }
+        }
+    });
+</script>
+<script>
+    $('#media_type').change(function() {
+        if ($('#media_type').val() == 1 || $('#media_type').val() == 2) {
+            $('#link').hide();
+            $('#file').show();
+        } else {
+            $('#file').hide();
+            $('#link').show();
+        }
+    });
+</script>
 @endsection

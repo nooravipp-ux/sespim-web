@@ -6,7 +6,7 @@
         <div class="col-12 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">User</h4>
+                    <h4 class="card-title">Edit User</h4>
                     <form class="form-sample" method="post" action="{{route('user.update')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">

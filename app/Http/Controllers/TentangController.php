@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class TentangController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $pages = DB::table('t_page')->get();
         return view('admin.tentang.index', compact('pages'));

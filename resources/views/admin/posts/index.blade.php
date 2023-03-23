@@ -42,9 +42,9 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Posts</h4>
-                    <a href="{{route('post.create')}}" class="btn btn-primary">Tambah</a>
+                    <a href="{{route('post.create')}}" class="btn btn-primary mb-3">Tambah</a>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="table">
                             <thead>
                                 <tr>
                                     <th>
@@ -62,10 +62,10 @@
                                     <th>
                                         Author
                                     </th>
-                                    <th>
+                                    <th class="text-center">
                                         Published
                                     </th>
-                                    <th>
+                                    <th class="text-center">
                                         Action
                                     </th>
                                 </tr>
@@ -79,14 +79,14 @@
                                     <td>{{ $post->category_name }}</td>
                                     <td>{{ $post->summary }}</td>
                                     <td>{{ $post->name}}</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if($post->published == 1)
-                                            Yes
+                                        Yes
                                         @else
-                                            No
+                                        No
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="{{route('post.edit',['id' => $post->id])}}"><i class="icon-grid menu-icon ti-pencil"></i></a>
                                         <a href="{{route('post.delete',['id' => $post->id])}}" onclick="return confirm('apakah anda yakin ?')"><i class="icon-grid menu-icon ti-trash"></i></a>
                                     </td>
@@ -100,4 +100,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        $('#table').DataTable();
+    });
+</script>
 @endsection

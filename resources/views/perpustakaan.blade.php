@@ -20,10 +20,10 @@
     <div class="container">
         <div class="row">
             @foreach($books as $post)
-            <div class="col-lg-3 col-md-6" style="border-radius: 4%">
-                <div class="single-latest-news">
+            <div class="col-lg-3 col-md-3 col-sm-3" style="border-radius: 4%">
+                <div class="single-latest-news" style="height: 100%;">
                     <div class="latest-news-">
-                        <img src="{{asset('assets/img/image-cover/'.$post->image_cover)}}" alt="banner-image" width="300" height="300">
+                        <img src="{{asset('assets/img/image-cover/'.$post->image_cover)}}" alt="banner-image" width="100%" height="100%">
                     </div>
                     <div class="news-text-box">
                         <p class="excerpt">{{$post->title}}</p>

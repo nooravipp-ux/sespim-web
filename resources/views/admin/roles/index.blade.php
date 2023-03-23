@@ -26,7 +26,7 @@
                                     <td>{{ $ct->name }}</td>
                                     <td>{{ $ct->description }}</td>
                                     <td>
-                                        <a href=""><i class="icon-grid menu-icon ti-pencil"></i></a>
+                                        <a href="{{route('role.edit',['id' => $ct->id])}}"><i class="icon-grid menu-icon ti-pencil"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

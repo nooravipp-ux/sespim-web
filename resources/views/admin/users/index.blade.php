@@ -26,7 +26,7 @@
                                     <td>{{ $ct->username }}</td>
                                     <td>{{ $ct->role_name }}</td>
                                     <td>
-                                        <a href=""><i class="icon-grid menu-icon ti-pencil"></i></a>
+                                        <a href="{{route('user.edit',['id' => $ct->id])}}"><i class="icon-grid menu-icon ti-pencil"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

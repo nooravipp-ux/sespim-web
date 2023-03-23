@@ -8,9 +8,9 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Galeri</h4>
-                    <a href="{{route('galeri.create')}}" class="btn btn-primary">Tambah</a>
+                    <a href="{{route('galeri.create')}}" class="btn btn-primary mb-3">Tambah</a>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="table">
                             <thead>
                                 <tr>
                                     <th>
@@ -22,10 +22,10 @@
                                     <th>
                                         Description
                                     </th>
-                                    <th>
+                                    <th class="text-center">
                                         Media Type
                                     </th>
-                                    <th>
+                                    <th class="text-center">
                                         Action
                                     </th>
                                 </tr>
@@ -37,8 +37,8 @@
                                     <td><?php echo $no++; ?></td>
                                     <td>{{ $post->title }}</td>
                                     <td>{!! $post->description !!}</td>
-                                    <td>{{ $post->media_type }}</td>
-                                    <td>
+                                    <td class="text-center">{{ $post->media_type }}</td>
+                                    <td class="text-center">
                                         <a href="{{route('galeri.edit',['id' => $post->id])}}"><i class="icon-grid menu-icon ti-pencil"></i></a>
                                         <a href="{{route('galeri.delete',['id' => $post->id])}}" onclick="return confirm('apakah anda yakin ?')"><i class="icon-grid menu-icon ti-trash"></i></a>
                                     </td>
@@ -52,4 +52,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        $('#table').DataTable();
+    });
+</script>
 @endsection

@@ -9,7 +9,7 @@ class FrontController extends Controller
 {
     public function index(){
         $beranda = DB::table('t_beranda')->first();
-        $posts = DB::table('t_post')->get();
+        $posts = DB::table('t_post')->orderBy('id', 'DESC')->limit(6)->get();;
         $newestPost = DB::table('t_post')->orderBy('id', 'DESC')->limit(3)->get();
         return view('welcome', compact('posts', 'newestPost', 'beranda'));
     }
@@ -35,12 +35,12 @@ class FrontController extends Controller
     }
 
     public function galeri(){
-        $medias = DB::table('t_galeri')->where('media_type', 'image')->get();
+        $medias = DB::table('t_galeri')->where('media_type', 1)->paginate(9);
         return view('galeri', compact('medias'));
     }
 
     public function galeriVideo(){
-        $medias = DB::table('t_galeri')->where('media_type', 'video')->get();
+        $medias = DB::table('t_galeri')->where('media_type', '!=', 1)->paginate(9);
         return view('galeri-video', compact('medias'));
     }
 

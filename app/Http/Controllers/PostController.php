@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use File;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $categories = DB::table('m_category')->get();
@@ -27,6 +32,12 @@ class PostController extends Controller
 
     public function save(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'image_banner' => 'required|mimes:jpg,png,jpeg',
+            'content' => 'required',
+            'category_id' => 'required'
+        ]);
 
         $file_image_banner = $request->file('image_banner');
         $file_image_banner_fileName = NULL;
@@ -82,13 +93,25 @@ class PostController extends Controller
 
     public function update(Request $request)
     {
+
         $file_image_banner = $request->file('image_banner');
         $file_image_banner_fileName = NULL;
+
+        if($file_image_banner){
+            $request->validate([
+                'image_banner' => 'required|mimes:jpg,png,jpeg',
+            ]);
+        }
 
         if ($file_image_banner) {
             $file_image_banner_fileName = time() . "_" . $file_image_banner->getClientOriginalName();
             $file_image_banner_destinationPath = public_path() . '/assets/img/post-images';
             $file_image_banner->move($file_image_banner_destinationPath, $file_image_banner_fileName);
+
+            if(File::exists(public_path('/assets/img/post-images/'.$request->image_banner_existing))){
+                File::delete(public_path('/assets/img/post-images/'.$request->image_banner_existing));
+            }
+
         }else{
             $file_image_banner_fileName = $request->image_banner_existing;
         }
@@ -109,7 +132,13 @@ class PostController extends Controller
 
     public function delete($id)
     {
+        $data = DB::table('t_post')->where('id', $id)->first();
         DB::table('t_post')->where('id', $id)->delete();
+
+        if(File::exists(public_path('/assets/img/image-cover/'.$data->image_banner))){
+            File::delete(public_path('/assets/img/image-cover/'.$data->image_banner));
+        }
+
         return redirect()->back();
     }
 

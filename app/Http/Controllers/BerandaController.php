@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class BerandaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $data = DB::table('t_beranda')->first();

@@ -16,6 +16,9 @@
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="title" value="{{$data->title}}"/>
                                         <input type="hidden" class="form-control" name="id" value="{{$data->id}}"/>
+                                        @if($errors->has('title'))
+                                        <div class="error mt-3 text-danger">{{ $errors->first('title') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -23,6 +26,9 @@
                                     <div class="col-sm-9">
                                         <input type="file" class="form-control" name="image_cover">
                                         <input type="hidden" class="form-control" name="image_cover_existing" value="{{$data->image_cover}}">
+                                        @if($errors->has('image_cover'))
+                                        <div class="error mt-3 text-danger">{{ $errors->first('image_cover') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -30,6 +36,9 @@
                                     <div class="col-sm-9">
                                         <input type="file" class="form-control" name="file">
                                         <input type="hidden" class="form-control" name="file_existing" value="{{$data->file}}">
+                                        @if($errors->has('file'))
+                                        <div class="error mt-3 text-danger">{{ $errors->first('file') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-group row">

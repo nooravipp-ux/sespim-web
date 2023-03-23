@@ -144,13 +144,13 @@
                     <div class="footer-box get-in-touch">
                         <h2 class="widget-title">Alamat SESPIM</h2>
                         <ul>
-                            <li>Jl. Maribaya No 54 Desa Kayu Ambon Kecamatan Lembang, Kabupaten Bandung Barat 40391</li>
+                            <li>Jl. Maribaya No 53 Desa Kayu Ambon Kecamatan Lembang, Kabupaten Bandung Barat 40391</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-box pages">
-                        <img src="{{asset('assets/img/footer-logo.png')}}" alt="" width="300" height="160">
+                        <img src="{{asset('assets/img/footer-logo.png')}}" alt="" width="300" height="140">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -169,7 +169,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
-                    <p>Copyrights &copy; 2023 - <a href="/">SESPIM LEMDIKLAT POLRI</p>
+                    <p>Copyrights &copy; <?php echo date("Y"); ?> - <a href="/">SESPIM LEMDIKLAT POLRI</p>
                 </div>
                 <div class="col-lg-6 text-right col-md-12">
                     <div class="social-icons">
